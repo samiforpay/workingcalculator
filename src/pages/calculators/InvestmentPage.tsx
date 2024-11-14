@@ -1,4 +1,4 @@
-import { investmentCalculators } from '@/config/calculators'
+import { miscCalculators } from '@/config/calculators'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Link } from 'react-router-dom'
@@ -7,13 +7,18 @@ import { Footer } from '@/components/layout/Footer'
 import type { CalculatorConfig } from '@/config/formulas/types'
 
 export default function InvestmentPage() {
+  // Filter misc calculators to only show investment related ones
+  const investmentTools = miscCalculators.filter(calc => 
+    calc.href.includes('investment')
+  )
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow container mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold mb-8 text-center text-blue-900">Investment Tools</h1>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {investmentCalculators.map((calculator: CalculatorConfig) => (
+          {investmentTools.map((calculator: CalculatorConfig) => (
             <Card key={calculator.href} className="h-full hover:shadow-xl transition-all duration-300">
               <CardHeader className={`${calculator.color} bg-opacity-10`}>
                 <div className="flex items-center justify-between">

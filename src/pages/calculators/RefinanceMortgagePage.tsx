@@ -3,4 +3,4 @@ import { CalculatorPageTemplate } from '@/components/calculator/CalculatorPageTe
 
 export default function RefinanceMortgagePage() {
   return <CalculatorPageTemplate formula={refinanceCalculator} />
-} 
+}

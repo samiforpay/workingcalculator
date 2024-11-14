@@ -42,6 +42,8 @@ import SalesTaxPage from './pages/calculators/SalesTaxPage'
 import PropertyTaxPage from './pages/calculators/PropertyTaxPage'
 import RetirementContributionsPage from './pages/calculators/RetirementContributionsPage'
 import QuarterlyTaxPage from './pages/calculators/QuarterlyTaxPage'
+import InvestmentGrowthPage from './pages/calculators/InvestmentGrowthPage'
+import NetWorthPage from './pages/calculators/NetWorthPage'
 
 export default function App() {
   return (
@@ -97,6 +99,10 @@ export default function App() {
       <Route path="/calculator/financial/compound" element={<CompoundInterestPage />} />
       <Route path="/calculator/financial/inflation" element={<InflationPage />} />
       <Route path="/calculator/financial/savings-goal" element={<SavingsGoalPage />} />
+
+      {/* Financial Savings Calculator Routes */}
+      <Route path="/calculator/financial-savings/investment-growth" element={<InvestmentGrowthPage />} />
+      <Route path="/calculator/financial-savings/net-worth" element={<NetWorthPage />} />
     </Routes>
   )
 }

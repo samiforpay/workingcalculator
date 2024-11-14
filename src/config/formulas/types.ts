@@ -1,16 +1,26 @@
 import { LucideIcon } from 'lucide-react'
 
 // Basic types
-export type VariableType = 'currency' | 'percentage' | 'number'
+export type VariableType = 
+  | 'currency' 
+  | 'percentage' 
+  | 'number' 
+  | 'checkbox'  // For toggling sections
+  | 'radio'     // For single selection from options
+  | 'select'    // For dropdowns
 
 export interface Variable {
   label: string
   type: VariableType
   defaultValue: number
-  min: number
+  min?: number
   max?: number
   step?: number
   helpText: string
+  options?: { label: string; value: number }[] // For radio/select options
+  group?: string // For grouping related fields
+  dependsOn?: string // Field is shown only if this field is checked/selected
+  showWhen?: number
 }
 
 // Formula interface with specific result types
@@ -26,16 +36,10 @@ export interface Formula<T extends Record<string, number> = Record<string, numbe
 export type CalculatorCategory = 
   | 'roi'
   | 'tax'
-  | 'investment'
-  | 'retirement'
   | 'debt'
   | 'mortgage'
-  | 'business'
-  | 'wealth'
-  | 'financial'
-  | 'emergency'
-  | 'home'
-  | 'real-estate'
+  | 'financial-savings'
+  | 'misc'
 
 export interface CalculatorConfig {
   name: string
@@ -44,8 +48,6 @@ export interface CalculatorConfig {
   icon: LucideIcon
   color: string
   category: CalculatorCategory
-  subcategory?: string
-  bgImage?: string
 }
 
 // Calculator form props

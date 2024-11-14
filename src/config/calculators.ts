@@ -97,18 +97,6 @@ export const taxCalculators: CalculatorConfig[] = [
   }
 ]
 
-// Retirement Calculators
-export const retirementCalculators: CalculatorConfig[] = [
-  {
-    name: 'Retirement Savings',
-    description: 'Plan your retirement savings and calculate needed contributions',
-    href: '/calculator/retirement/savings',
-    icon: PiggyBank,
-    color: 'bg-purple-500',
-    category: 'retirement'
-  }
-]
-
 // Debt Calculators
 export const debtCalculators: CalculatorConfig[] = [
   {
@@ -149,100 +137,70 @@ export const mortgageCalculators: CalculatorConfig[] = [
   }
 ]
 
-// Emergency Fund Calculators
-export const emergencyCalculators: CalculatorConfig[] = [
+// Financial Savings Calculators
+export const financialSavingsCalculators: CalculatorConfig[] = [
+  {
+    name: 'Investment Growth',
+    description: 'Calculate how your investments grow over time with compound interest and regular contributions',
+    href: '/calculator/financial-savings/investment-growth',
+    icon: TrendingUp,
+    color: 'bg-emerald-500',
+    category: 'financial-savings'
+  },
+  {
+    name: 'Net Worth',
+    description: 'Calculate your total net worth by analyzing your assets and liabilities',
+    href: '/calculator/financial-savings/net-worth',
+    icon: Wallet,
+    color: 'bg-blue-500',
+    category: 'financial-savings'
+  }
+]
+
+// Miscellaneous Calculators
+export const miscCalculators: CalculatorConfig[] = [
+  {
+    name: 'Retirement Savings',
+    description: 'Plan your retirement savings and calculate needed contributions',
+    href: '/calculator/retirement/savings',
+    icon: PiggyBank,
+    color: 'bg-purple-500',
+    category: 'misc'
+  },
   {
     name: 'Emergency Fund',
     description: 'Calculate how much emergency savings you need',
     href: '/calculator/emergency/fund',
     icon: Shield,
     color: 'bg-yellow-500',
-    category: 'emergency'
-  }
-]
-
-// Business Calculators
-export const businessCalculators: CalculatorConfig[] = [
+    category: 'misc'
+  },
   {
     name: 'Break-Even Analysis',
-    description: 'Calculate your break-even point',
+    description: 'Calculate your break-even point in units and revenue',
     href: '/calculator/business/break-even',
-    icon: Briefcase,
-    color: 'bg-purple-500',
-    category: 'business'
-  }
-]
-
-// Investment Calculators
-export const investmentCalculators: CalculatorConfig[] = [
-  {
-    name: 'Investment Returns',
-    description: 'Calculate investment returns with dividends and capital gains',
-    href: '/calculator/investment/returns',
-    icon: TrendingUp,
+    icon: BarChart3,
     color: 'bg-blue-500',
-    category: 'investment'
-  },
-  {
-    name: 'Portfolio Rebalancing',
-    description: 'Rebalance your investment portfolio',
-    href: '/calculator/investment/portfolio',
-    icon: PiggyBank,
-    color: 'bg-purple-500',
-    category: 'investment'
+    category: 'misc'
   }
 ]
 
-// Financial Calculators
-export const financialCalculators: CalculatorConfig[] = [
-  {
-    name: 'Compound Interest',
-    description: 'Calculate how your investments grow over time',
-    href: '/calculator/financial/compound',
-    icon: Coins,
-    color: 'bg-green-500',
-    category: 'financial'
-  },
-  {
-    name: 'Inflation Impact',
-    description: 'Calculate how inflation affects your money',
-    href: '/calculator/financial/inflation',
-    icon: Wallet,
-    color: 'bg-red-500',
-    category: 'financial'
-  },
-  {
-    name: 'Savings Goal',
-    description: 'Plan how to reach your savings goals',
-    href: '/calculator/financial/savings-goal',
-    icon: Target,
-    color: 'bg-blue-500',
-    category: 'financial'
-  }
-]
-
-// Combine all calculators
-export const calculators = [
-  ...roiCalculators,
-  ...taxCalculators,
-  ...retirementCalculators,
-  ...debtCalculators,
-  ...mortgageCalculators,
-  ...emergencyCalculators,
-  ...businessCalculators,
-  ...investmentCalculators,
-  ...financialCalculators
-]
-
-// Define categories and their titles
+// Calculator categories
 export const calculatorCategories = {
-  roi: 'ROI Calculators',
+  roi: 'Return on Investment',
   tax: 'Tax Calculators',
-  retirement: 'Retirement Planning',
   debt: 'Debt Management',
   mortgage: 'Mortgage Calculators',
-  emergency: 'Emergency Fund',
-  business: 'Business Tools',
-  investment: 'Investment Tools',
-  financial: 'Financial Planning'
+  'financial-savings': 'Financial Savings',
+  misc: 'Other Calculators'
 } as const
+
+// Combined calculators array for homepage
+export const calculators: CalculatorConfig[] = [
+  ...roiCalculators,
+  ...taxCalculators,
+  ...debtCalculators,
+  ...mortgageCalculators,
+  ...financialSavingsCalculators,
+  ...miscCalculators
+]

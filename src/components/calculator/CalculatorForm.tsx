@@ -4,16 +4,19 @@ import { useState } from 'react'
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useAnnouncement } from '@/contexts/AnnouncementContext'
 import type { Formula, Variable } from '@/config/formulas/types'
 
-interface CalculatorFormProps<T extends Record<string, number>> {
-  formula: Formula<T>
+interface CalculatorFormProps {
+  formula: Formula
   onCalculate: (inputs: Record<string, number>) => Promise<void>
   isCalculating?: boolean
 }
 
-export function CalculatorForm({ formula, onCalculate, isCalculating }: CalculatorFormProps<T>) {
+export function CalculatorForm({ formula, onCalculate, isCalculating }: CalculatorFormProps) {
   const [inputs, setInputs] = useState<Record<string, number>>(() => 
     Object.entries(formula.variables).reduce((acc, [key, variable]) => ({
       ...acc,
@@ -24,8 +27,18 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
   const [errors, setErrors] = useState<Record<string, string>>({})
   const { announce } = useAnnouncement()
 
+  const shouldShowField = (key: string, variable: Variable): boolean => {
+    if (!variable.dependsOn) return true
+    
+    const dependentValue = inputs[variable.dependsOn]
+    if (variable.showWhen !== undefined) {
+      return dependentValue === 1 && inputs[variable.dependsOn] === variable.showWhen
+    }
+    return dependentValue === 1
+  }
+
   const validateInput = (key: string, value: number, variable: Variable): boolean => {
-    if (value < variable.min) {
+    if (variable.min !== undefined && value < variable.min) {
       setErrors(prev => ({ ...prev, [key]: `Minimum value is ${variable.min}` }))
       return false
     }
@@ -41,10 +54,93 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
     return true
   }
 
+  const handleInputChange = (key: string, variable: Variable, value: string | number | boolean) => {
+    let numValue: number
+    
+    if (typeof value === 'boolean') {
+      numValue = value ? 1 : 0
+    } else {
+      numValue = typeof value === 'string' ? parseFloat(value) : value
+      if (isNaN(numValue)) return
+    }
+
+    if (validateInput(key, numValue, variable)) {
+      setInputs(prev => ({ ...prev, [key]: numValue }))
+    }
+  }
+
+  const renderInput = (key: string, variable: Variable) => {
+    if (!shouldShowField(key, variable)) {
+      return null
+    }
+
+    switch (variable.type) {
+      case 'checkbox':
+        return (
+          <Checkbox
+            id={key}
+            checked={inputs[key] === 1}
+            onCheckedChange={(checked) => handleInputChange(key, variable, checked)}
+            disabled={isCalculating}
+          />
+        )
+
+      case 'select':
+        return (
+          <Select
+            value={inputs[key].toString()}
+            onValueChange={(value) => handleInputChange(key, variable, parseInt(value))}
+            disabled={isCalculating}
+          >
+            <SelectTrigger>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {variable.options?.map((option) => (
+                <SelectItem key={option.value} value={option.value.toString()}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )
+
+      case 'radio':
+        return (
+          <RadioGroup
+            value={inputs[key].toString()}
+            onValueChange={(value) => handleInputChange(key, variable, parseInt(value))}
+            disabled={isCalculating}
+          >
+            {variable.options?.map((option) => (
+              <div key={option.value} className="flex items-center space-x-2">
+                <RadioGroupItem value={option.value.toString()} id={`${key}-${option.value}`} />
+                <Label htmlFor={`${key}-${option.value}`}>{option.label}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        )
+
+      default:
+        return (
+          <Input
+            id={key}
+            type="number"
+            value={inputs[key]}
+            onChange={(e) => handleInputChange(key, variable, e.target.value)}
+            step={variable.step || (variable.type === 'percentage' ? '0.01' : '1')}
+            min={variable.min}
+            max={variable.max}
+            required
+            disabled={isCalculating}
+          />
+        )
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Validate all inputs
     let isValid = true
     Object.entries(formula.variables).forEach(([key, variable]) => {
       if (!validateInput(key, inputs[key], variable)) {
@@ -66,43 +162,47 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
     }
   }
 
-  const handleInputChange = (key: string, variable: Variable, value: string) => {
-    const numValue = parseFloat(value)
-    if (isNaN(numValue)) return
-
-    if (validateInput(key, numValue, variable)) {
-      setInputs(prev => ({ ...prev, [key]: numValue }))
+  const renderField = (key: string, variable: Variable) => {
+    if (!shouldShowField(key, variable)) {
+      return null
     }
+
+    return (
+      <div key={key} className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Label htmlFor={key}>{variable.label}</Label>
+          {renderInput(key, variable)}
+        </div>
+        {errors[key] && (
+          <p id={`${key}-error`} className="text-sm text-red-500">
+            {errors[key]}
+          </p>
+        )}
+        {variable.helpText && (
+          <p className="text-sm text-gray-500">{variable.helpText}</p>
+        )}
+      </div>
+    )
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {Object.entries(formula.variables).map(([key, variable]) => (
-        <div key={key} className="space-y-2">
-          <Label htmlFor={key}>{variable.label}</Label>
-          <Input
-            id={key}
-            type="number"
-            value={inputs[key]}
-            onChange={(e) => handleInputChange(key, variable, e.target.value)}
-            step={variable.step || (variable.type === 'percentage' ? '0.01' : '1')}
-            min={variable.min}
-            max={variable.max}
-            required
-            disabled={isCalculating}
-            aria-invalid={!!errors[key]}
-            aria-describedby={errors[key] ? `${key}-error` : undefined}
-          />
-          {errors[key] && (
-            <p id={`${key}-error`} className="text-sm text-red-500">
-              {errors[key]}
-            </p>
-          )}
-          {variable.helpText && (
-            <p className="text-sm text-gray-500">{variable.helpText}</p>
-          )}
-        </div>
-      ))}
+      {Object.entries(formula.variables).map(([key, variable]) => {
+        if (variable.type === 'checkbox') {
+          return (
+            <div key={key} className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Label htmlFor={key}>{variable.label}</Label>
+                {renderInput(key, variable)}
+              </div>
+              {variable.helpText && (
+                <p className="text-sm text-gray-500">{variable.helpText}</p>
+              )}
+            </div>
+          )
+        }
+        return renderField(key, variable)
+      })}
       <Button 
         type="submit" 
         className="w-full" 
