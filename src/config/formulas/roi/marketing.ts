@@ -1,28 +1,79 @@
 import type { Formula } from '@/config/formulas/types'
 
-export const marketingRoiCalculator: Formula = {
+interface MarketingRoiResult extends Record<string, number> {
+  roi: number
+  netProfit: number
+  conversionRate: number
+  costPerConversion: number
+  [key: string]: number
+}
+
+export const marketingRoiCalculator: Formula<MarketingRoiResult> = {
   name: 'Marketing ROI Calculator',
-  description: 'Calculate return on investment for marketing campaigns',
+  description: 'Calculate the return on investment for your marketing campaigns',
   variables: {
-    campaignCost: {
-      label: 'Campaign Cost',
+    marketingCost: {
+      label: 'Marketing Campaign Cost',
       type: 'currency',
-      defaultValue: 10000,
+      defaultValue: 5000,
       min: 0,
       step: 100,
       helpText: 'Total cost of marketing campaign'
     },
-    // Add other variables as needed
+    revenue: {
+      label: 'Revenue Generated',
+      type: 'currency',
+      defaultValue: 15000,
+      min: 0,
+      step: 100,
+      helpText: 'Total revenue from campaign'
+    },
+    totalLeads: {
+      label: 'Total Leads Generated',
+      type: 'number',
+      defaultValue: 1000,
+      min: 0,
+      step: 1,
+      helpText: 'Number of leads generated'
+    },
+    conversions: {
+      label: 'Number of Conversions',
+      type: 'number',
+      defaultValue: 100,
+      min: 0,
+      step: 1,
+      helpText: 'Number of leads that converted to sales'
+    }
   },
   calculate: (inputs) => {
-    // Add calculation logic
+    const { marketingCost, revenue, totalLeads, conversions } = inputs
+    
+    const netProfit = revenue - marketingCost
+    const roi = (netProfit / marketingCost) * 100
+    const conversionRate = (conversions / totalLeads) * 100
+    const costPerConversion = marketingCost / conversions
+
     return {
-      totalReturn: 0,
-      roi: 0,
-      annualizedRoi: 0
+      roi,
+      netProfit,
+      conversionRate,
+      costPerConversion
     }
   },
   formatResult: (result) => {
-    return 'Result formatting here'
+    const formatter = new Intl.NumberFormat('en-US', { 
+      style: 'currency', 
+      currency: 'USD',
+      maximumFractionDigits: 0
+    })
+
+    return `
+Marketing Campaign Analysis:
+------------------------
+ROI: ${result.roi.toFixed(2)}%
+Net Profit: ${formatter.format(result.netProfit)}
+Conversion Rate: ${result.conversionRate.toFixed(2)}%
+Cost per Conversion: ${formatter.format(result.costPerConversion)}
+    `.trim()
   }
 } 

@@ -11,6 +11,7 @@ import BusinessRoiPage from './pages/calculators/BusinessRoiPage'
 import TaxPage from './pages/calculators/TaxPage'
 import IncomeTaxPage from './pages/calculators/IncomeTaxPage'
 import CapitalGainsTaxPage from './pages/calculators/CapitalGainsTaxPage'
+import WealthTaxPage from './pages/calculators/WealthTaxPage'
 
 import RetirementPage from './pages/calculators/RetirementPage'
 import RetirementSavingsPage from './pages/calculators/RetirementSavingsPage'
@@ -37,6 +38,10 @@ import FinancialPage from './pages/calculators/FinancialPage'
 import CompoundInterestPage from './pages/calculators/CompoundInterestPage'
 import InflationPage from './pages/calculators/InflationPage'
 import SavingsGoalPage from './pages/calculators/SavingsGoalPage'
+import SalesTaxPage from './pages/calculators/SalesTaxPage'
+import PropertyTaxPage from './pages/calculators/PropertyTaxPage'
+import RetirementContributionsPage from './pages/calculators/RetirementContributionsPage'
+import QuarterlyTaxPage from './pages/calculators/QuarterlyTaxPage'
 
 export default function App() {
   return (
@@ -54,6 +59,11 @@ export default function App() {
       <Route path="/calculator/tax" element={<TaxPage />} />
       <Route path="/calculator/tax/income" element={<IncomeTaxPage />} />
       <Route path="/calculator/tax/capital-gains" element={<CapitalGainsTaxPage />} />
+      <Route path="/calculator/tax/wealth" element={<WealthTaxPage />} />
+      <Route path="/calculator/tax/sales" element={<SalesTaxPage />} />
+      <Route path="/calculator/tax/property" element={<PropertyTaxPage />} />
+      <Route path="/calculator/tax/retirement" element={<RetirementContributionsPage />} />
+      <Route path="/calculator/tax/quarterly" element={<QuarterlyTaxPage />} />
 
       {/* Retirement Calculator Routes */}
       <Route path="/calculator/retirement" element={<RetirementPage />} />

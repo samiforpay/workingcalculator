@@ -1,4 +1,4 @@
-import { Calculator, BarChart3, PiggyBank, Coins, TrendingUp, Building, Wallet, Target, DollarSign, Home, Shield, Briefcase } from 'lucide-react'
+import { Calculator, BarChart3, PiggyBank, Coins, TrendingUp, Building, Wallet, Target, DollarSign, Home, Shield, Briefcase, Percent, Landmark, CreditCard } from 'lucide-react'
 import type { CalculatorConfig } from './formulas/types'
 
 // ROI Calculators
@@ -44,7 +44,7 @@ export const taxCalculators: CalculatorConfig[] = [
     description: 'Calculate your income tax and take-home pay',
     href: '/calculator/tax/income',
     icon: DollarSign,
-    color: 'bg-green-500',
+    color: 'text-green-500',
     category: 'tax'
   },
   {
@@ -52,7 +52,47 @@ export const taxCalculators: CalculatorConfig[] = [
     description: 'Calculate tax on investment profits',
     href: '/calculator/tax/capital-gains',
     icon: TrendingUp,
-    color: 'bg-blue-500',
+    color: 'text-blue-500',
+    category: 'tax'
+  },
+  {
+    name: 'Wealth Tax',
+    description: 'Calculate tax on total wealth and assets',
+    href: '/calculator/tax/wealth',
+    icon: Wallet,
+    color: 'text-purple-500',
+    category: 'tax'
+  },
+  {
+    name: 'Sales Tax',
+    description: 'Calculate total cost including state and local sales tax',
+    href: '/calculator/tax/sales',
+    icon: Calculator,
+    color: 'text-indigo-500',
+    category: 'tax'
+  },
+  {
+    name: 'Property Tax',
+    description: 'Calculate annual property taxes based on assessed value and local rates',
+    href: '/calculator/tax/property',
+    icon: Home,
+    color: 'text-orange-500',
+    category: 'tax'
+  },
+  {
+    name: 'Retirement Contributions',
+    description: 'Calculate tax benefits from retirement account contributions',
+    href: '/calculator/tax/retirement',
+    icon: PiggyBank,
+    color: 'text-teal-500',
+    category: 'tax'
+  },
+  {
+    name: 'Quarterly Tax Estimator',
+    description: 'Calculate estimated quarterly tax payments for self-employed and business income',
+    href: '/calculator/tax/quarterly',
+    icon: Calculator,
+    color: 'text-violet-500',
     category: 'tax'
   }
 ]

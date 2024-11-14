@@ -2,32 +2,80 @@ import type { Formula } from '@/config/formulas/types'
 
 interface IncomeTaxResult extends Record<string, number> {
   taxableIncome: number
+  federalTax: number
+  stateTax: number
+  ficaTax: number
   totalTax: number
   effectiveRate: number
   takeHomePay: number
   monthlyTakeHome: number
-  [key: string]: number
+  taxByBracket: Record<string, number>
+  [key: string]: number | Record<string, number>
+}
+
+// Make tax brackets configurable for easy updates
+const TAX_CONFIG = {
+  year: 2023,
+  singleBrackets: [
+    { rate: 0.37, min: 578125, name: '37% Bracket' },
+    { rate: 0.35, min: 231250, name: '35% Bracket' },
+    { rate: 0.32, min: 182100, name: '32% Bracket' },
+    { rate: 0.24, min: 95375, name: '24% Bracket' },
+    { rate: 0.22, min: 44725, name: '22% Bracket' },
+    { rate: 0.12, min: 11000, name: '12% Bracket' },
+    { rate: 0.10, min: 0, name: '10% Bracket' }
+  ],
+  marriedBrackets: [
+    { rate: 0.37, min: 693750, name: '37% Bracket' },
+    { rate: 0.35, min: 462500, name: '35% Bracket' },
+    { rate: 0.32, min: 364200, name: '32% Bracket' },
+    { rate: 0.24, min: 190750, name: '24% Bracket' },
+    { rate: 0.22, min: 89450, name: '22% Bracket' },
+    { rate: 0.12, min: 22000, name: '12% Bracket' },
+    { rate: 0.10, min: 0, name: '10% Bracket' }
+  ],
+  standardDeduction: {
+    single: 13850,
+    married: 27700
+  },
+  socialSecurityWageCap: 160200,
+  socialSecurityRate: 0.062,
+  medicareRate: 0.0145,
+  additionalMedicareRate: 0.009,
+  additionalMedicareThreshold: {
+    single: 200000,
+    married: 250000
+  }
 }
 
 export const incomeTaxCalculator: Formula<IncomeTaxResult> = {
   name: 'Income Tax Calculator',
-  description: 'Calculate your income tax and take-home pay',
+  description: `Calculate your ${TAX_CONFIG.year} federal and state income tax based on current tax brackets`,
   variables: {
     grossIncome: {
       label: 'Annual Gross Income',
       type: 'currency',
-      defaultValue: 50000,
+      defaultValue: 75000,
       min: 0,
       step: 1000,
       helpText: 'Your total annual income before taxes'
     },
+    filingStatus: {
+      label: 'Filing Status',
+      type: 'number',
+      defaultValue: 1,
+      min: 1,
+      max: 2,
+      step: 1,
+      helpText: '1 for Single, 2 for Married Filing Jointly'
+    },
     deductions: {
       label: 'Total Deductions',
       type: 'currency',
-      defaultValue: 12950,
+      defaultValue: TAX_CONFIG.standardDeduction.single,
       min: 0,
       step: 100,
-      helpText: 'Standard deduction or total itemized deductions'
+      helpText: `Standard deduction (${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(TAX_CONFIG.standardDeduction.single)}) or itemized deductions`
     },
     taxCredits: {
       label: 'Tax Credits',
@@ -48,34 +96,47 @@ export const incomeTaxCalculator: Formula<IncomeTaxResult> = {
     }
   },
   calculate: (inputs) => {
-    const { grossIncome, deductions, taxCredits, stateTaxRate } = inputs
+    const { grossIncome, filingStatus, deductions, taxCredits, stateTaxRate } = inputs
+    const brackets = filingStatus === 1 ? TAX_CONFIG.singleBrackets : TAX_CONFIG.marriedBrackets
     
     // Calculate taxable income
     const taxableIncome = Math.max(0, grossIncome - deductions)
     
-    // Federal tax brackets (simplified)
+    // Calculate Federal Tax using progressive brackets
+    let remainingIncome = taxableIncome
     let federalTax = 0
-    if (taxableIncome > 539900) {
-      federalTax = 162718 + (taxableIncome - 539900) * 0.37
-    } else if (taxableIncome > 215950) {
-      federalTax = 49335 + (taxableIncome - 215950) * 0.35
-    } else if (taxableIncome > 170050) {
-      federalTax = 34647 + (taxableIncome - 170050) * 0.32
-    } else if (taxableIncome > 89075) {
-      federalTax = 15213 + (taxableIncome - 89075) * 0.24
-    } else if (taxableIncome > 41775) {
-      federalTax = 4807 + (taxableIncome - 41775) * 0.22
-    } else if (taxableIncome > 10275) {
-      federalTax = 1027.50 + (taxableIncome - 10275) * 0.12
-    } else {
-      federalTax = taxableIncome * 0.10
+    const taxByBracket: Record<string, number> = {}
+
+    for (const bracket of brackets) {
+      if (remainingIncome > bracket.min) {
+        const taxableAtThisRate = remainingIncome - bracket.min
+        const taxForBracket = taxableAtThisRate * bracket.rate
+        federalTax += taxForBracket
+        taxByBracket[bracket.name] = taxForBracket
+        remainingIncome = bracket.min
+      }
     }
+    
+    // Calculate FICA taxes
+    const socialSecurityTax = Math.min(grossIncome * TAX_CONFIG.socialSecurityRate, 
+                                     TAX_CONFIG.socialSecurityWageCap * TAX_CONFIG.socialSecurityRate)
+    
+    let medicareTax = grossIncome * TAX_CONFIG.medicareRate
+    const medicareThreshold = filingStatus === 1 
+      ? TAX_CONFIG.additionalMedicareThreshold.single 
+      : TAX_CONFIG.additionalMedicareThreshold.married
+
+    if (grossIncome > medicareThreshold) {
+      medicareTax += (grossIncome - medicareThreshold) * TAX_CONFIG.additionalMedicareRate
+    }
+    
+    const ficaTax = socialSecurityTax + medicareTax
     
     // Calculate state tax
     const stateTax = taxableIncome * (stateTaxRate / 100)
     
-    // Calculate total tax and apply credits
-    const totalTax = Math.max(0, federalTax + stateTax - taxCredits)
+    // Apply tax credits
+    const totalTax = Math.max(0, federalTax + stateTax + ficaTax - taxCredits)
     
     // Calculate take-home pay
     const takeHomePay = grossIncome - totalTax
@@ -86,10 +147,16 @@ export const incomeTaxCalculator: Formula<IncomeTaxResult> = {
 
     return {
       taxableIncome,
+      federalTax,
+      stateTax,
+      ficaTax,
       totalTax,
       effectiveRate,
       takeHomePay,
-      monthlyTakeHome
+      monthlyTakeHome,
+      taxByBracket,
+      socialSecurityTax,
+      medicareTax
     }
   },
   formatResult: (result) => {
@@ -99,10 +166,32 @@ export const incomeTaxCalculator: Formula<IncomeTaxResult> = {
       maximumFractionDigits: 0
     })
 
+    let breakdownByBracket = '\nFederal Tax Breakdown:\n'
+    breakdownByBracket += '--------------------\n'
+    for (const [bracket, amount] of Object.entries(result.taxByBracket)) {
+      if (amount > 0) {
+        breakdownByBracket += `${bracket}: ${formatter.format(amount)}\n`
+      }
+    }
+
     return `
-Income Tax Analysis:
+Income Tax Analysis (${TAX_CONFIG.year}):
 -----------------
 Taxable Income: ${formatter.format(result.taxableIncome)}
+
+Tax Breakdown:
+------------
+Federal Tax: ${formatter.format(result.federalTax)}${breakdownByBracket}
+State Tax: ${formatter.format(result.stateTax)}
+
+FICA Taxes:
+---------
+Social Security: ${formatter.format(result.socialSecurityTax)}
+Medicare: ${formatter.format(result.medicareTax)}
+Total FICA: ${formatter.format(result.ficaTax)}
+
+Summary:
+-------
 Total Tax: ${formatter.format(result.totalTax)}
 Effective Tax Rate: ${result.effectiveRate.toFixed(1)}%
 
