@@ -1,0 +1,8 @@
+import CashFlowPage from './pages/calculators/CashFlowPage';
+
+const routes = [
+  { path: '/calculator/business-related/cash-flow', component: CashFlowPage },
+  // Add other routes here
+];
+
+export default routes; 

@@ -17,25 +17,15 @@ interface CalculatorFormProps {
 }
 
 export function CalculatorForm({ formula, onCalculate, isCalculating }: CalculatorFormProps) {
-  const [inputs, setInputs] = useState<Record<string, number>>(() => 
-    Object.entries(formula.variables).reduce((acc, [key, variable]) => ({
-      ...acc,
-      [key]: variable.defaultValue
-    }), {} as Record<string, number>)
-  )
+  const [values, setValues] = useState(() => {
+    return Object.entries(formula.variables).reduce((acc, [name, variable]) => {
+      acc[name] = variable.defaultValue
+      return acc
+    }, {} as Record<string, number>)
+  })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
   const { announce } = useAnnouncement()
-
-  const shouldShowField = (key: string, variable: Variable): boolean => {
-    if (!variable.dependsOn) return true
-    
-    const dependentValue = inputs[variable.dependsOn]
-    if (variable.showWhen !== undefined) {
-      return dependentValue === 1 && inputs[variable.dependsOn] === variable.showWhen
-    }
-    return dependentValue === 1
-  }
 
   const validateInput = (key: string, value: number, variable: Variable): boolean => {
     if (variable.min !== undefined && value < variable.min) {
@@ -54,41 +44,21 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
     return true
   }
 
-  const handleInputChange = (key: string, variable: Variable, value: string | number | boolean) => {
-    let numValue: number
-    
-    if (typeof value === 'boolean') {
-      numValue = value ? 1 : 0
-    } else {
-      numValue = typeof value === 'string' ? parseFloat(value) : value
-      if (isNaN(numValue)) return
-    }
+  const handleInputChange = (key: string, variable: Variable, value: string | number) => {
+    const numValue = typeof value === 'string' ? parseFloat(value) : value
+    if (isNaN(numValue)) return
 
     if (validateInput(key, numValue, variable)) {
-      setInputs(prev => ({ ...prev, [key]: numValue }))
+      setValues(prev => ({ ...prev, [key]: numValue }))
     }
   }
 
   const renderInput = (key: string, variable: Variable) => {
-    if (!shouldShowField(key, variable)) {
-      return null
-    }
-
     switch (variable.type) {
-      case 'checkbox':
-        return (
-          <Checkbox
-            id={key}
-            checked={inputs[key] === 1}
-            onCheckedChange={(checked) => handleInputChange(key, variable, checked)}
-            disabled={isCalculating}
-          />
-        )
-
       case 'select':
         return (
           <Select
-            value={inputs[key].toString()}
+            value={values[key].toString()}
             onValueChange={(value) => handleInputChange(key, variable, parseInt(value))}
             disabled={isCalculating}
           >
@@ -105,28 +75,12 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
           </Select>
         )
 
-      case 'radio':
-        return (
-          <RadioGroup
-            value={inputs[key].toString()}
-            onValueChange={(value) => handleInputChange(key, variable, parseInt(value))}
-            disabled={isCalculating}
-          >
-            {variable.options?.map((option) => (
-              <div key={option.value} className="flex items-center space-x-2">
-                <RadioGroupItem value={option.value.toString()} id={`${key}-${option.value}`} />
-                <Label htmlFor={`${key}-${option.value}`}>{option.label}</Label>
-              </div>
-            ))}
-          </RadioGroup>
-        )
-
       default:
         return (
           <Input
             id={key}
             type="number"
-            value={inputs[key]}
+            value={values[key]}
             onChange={(e) => handleInputChange(key, variable, e.target.value)}
             step={variable.step || (variable.type === 'percentage' ? '0.01' : '1')}
             min={variable.min}
@@ -143,7 +97,7 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
     
     let isValid = true
     Object.entries(formula.variables).forEach(([key, variable]) => {
-      if (!validateInput(key, inputs[key], variable)) {
+      if (!validateInput(key, values[key], variable)) {
         isValid = false
       }
     })
@@ -154,7 +108,7 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
     }
 
     try {
-      await onCalculate(inputs)
+      await onCalculate(values)
       announce('Calculation completed')
     } catch (error) {
       announce('Error in calculation', true)
@@ -162,50 +116,23 @@ export function CalculatorForm({ formula, onCalculate, isCalculating }: Calculat
     }
   }
 
-  const renderField = (key: string, variable: Variable) => {
-    if (!shouldShowField(key, variable)) {
-      return null
-    }
-
-    return (
-      <div key={key} className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Label htmlFor={key}>{variable.label}</Label>
-          {renderInput(key, variable)}
-        </div>
-        {errors[key] && (
-          <p id={`${key}-error`} className="text-sm text-red-500">
-            {errors[key]}
-          </p>
-        )}
-        {variable.helpText && (
-          <p className="text-sm text-gray-500">{variable.helpText}</p>
-        )}
-      </div>
-    )
-  }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {Object.entries(formula.variables).map(([key, variable]) => {
-        if (variable.type === 'checkbox') {
-          return (
-            <div key={key} className="space-y-2">
-              <div className="flex items-center gap-2">
-                <Label htmlFor={key}>{variable.label}</Label>
-                {renderInput(key, variable)}
-              </div>
-              {variable.helpText && (
-                <p className="text-sm text-gray-500">{variable.helpText}</p>
-              )}
-            </div>
-          )
-        }
-        return renderField(key, variable)
-      })}
+      {Object.entries(formula.variables).map(([key, variable]) => (
+        <div key={key} className="space-y-2">
+          <Label htmlFor={key}>{variable.label}</Label>
+          {renderInput(key, variable)}
+          {variable.helpText && (
+            <p className="text-sm text-gray-500">{variable.helpText}</p>
+          )}
+          {errors[key] && (
+            <p className="text-sm text-red-500">{errors[key]}</p>
+          )}
+        </div>
+      ))}
       <Button 
         type="submit" 
-        className="w-full" 
+        className="w-full mt-6" 
         disabled={isCalculating || Object.keys(errors).length > 0}
       >
         {isCalculating ? 'Calculating...' : 'Calculate'}

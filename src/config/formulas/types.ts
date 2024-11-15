@@ -5,22 +5,20 @@ export type VariableType =
   | 'currency' 
   | 'percentage' 
   | 'number' 
-  | 'checkbox'  // For toggling sections
-  | 'radio'     // For single selection from options
-  | 'select'    // For dropdowns
+  | 'select' 
+  | 'boolean'
 
 export interface Variable {
   label: string
   type: VariableType
-  defaultValue: number
+  defaultValue: number | boolean
   min?: number
-  max?: number
-  step?: number
-  helpText: string
-  options?: { label: string; value: number }[] // For radio/select options
-  group?: string // For grouping related fields
-  dependsOn?: string // Field is shown only if this field is checked/selected
-  showWhen?: number
+  max?: number | ((inputs: Record<string, number>) => number)
+  step?: number | 'any'
+  helpText?: string
+  options?: { label: string; value: number }[]
+  isSection?: boolean
+  dependsOn?: string
 }
 
 // Formula interface with specific result types
@@ -39,6 +37,7 @@ export type CalculatorCategory =
   | 'debt'
   | 'mortgage'
   | 'financial-savings'
+  | 'business-related'
   | 'misc'
 
 export interface CalculatorConfig {

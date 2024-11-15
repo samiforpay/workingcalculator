@@ -1,8 +1,16 @@
-import { Calculator, BarChart3, PiggyBank, Coins, TrendingUp, Building, Wallet, Target, DollarSign, Home, Shield, Briefcase, Percent, Landmark, CreditCard } from 'lucide-react'
+import { Calculator, BarChart3, PiggyBank, Coins, TrendingUp, Building, Wallet, Target, DollarSign, Home, Shield, Briefcase, Percent, Landmark, CreditCard, PieChart, AlertTriangle } from 'lucide-react'
 import type { CalculatorConfig } from './formulas/types'
 
 // ROI Calculators
 export const roiCalculators: CalculatorConfig[] = [
+  {
+    name: 'Investment Return',
+    description: 'Calculate your total and annualized returns on investments',
+    href: '/calculator/roi/investment-return',
+    icon: TrendingUp,
+    color: 'bg-emerald-500',
+    category: 'roi'
+  },
   {
     name: 'General ROI',
     description: 'Calculate return on investment for various scenarios',
@@ -33,6 +41,46 @@ export const roiCalculators: CalculatorConfig[] = [
     href: '/calculator/roi/business',
     icon: BarChart3,
     color: 'bg-purple-500',
+    category: 'roi'
+  },
+  {
+    name: 'Stock Trading',
+    description: 'Calculate profit/loss and returns from stock trades including fees',
+    href: '/calculator/roi/stock-trading',
+    icon: TrendingUp,
+    color: 'bg-pink-500',
+    category: 'roi'
+  },
+  {
+    name: 'Portfolio Rebalancing',
+    description: 'Calculate adjustments needed to maintain your target asset allocation',
+    href: '/calculator/roi/portfolio-rebalancing',
+    icon: PieChart,
+    color: 'bg-violet-500',
+    category: 'roi'
+  },
+  {
+    name: 'Options Trading',
+    description: 'Calculate potential profits and losses for call and put options',
+    href: '/calculator/roi/options-trading',
+    icon: TrendingUp,
+    color: 'bg-orange-500',
+    category: 'roi'
+  },
+  {
+    name: 'Risk Assessment',
+    description: 'Evaluate investment risk and calculate risk-adjusted returns',
+    href: '/calculator/roi/risk-assessment',
+    icon: AlertTriangle,
+    color: 'bg-red-500',
+    category: 'roi'
+  },
+  {
+    name: 'Bond Calculator',
+    description: 'Calculate bond yields, payments, and returns',
+    href: '/calculator/roi/bond',
+    icon: Calculator,
+    color: 'bg-cyan-500',
     category: 'roi'
   }
 ]
@@ -73,7 +121,7 @@ export const taxCalculators: CalculatorConfig[] = [
   },
   {
     name: 'Property Tax',
-    description: 'Calculate annual property taxes based on assessed value and local rates',
+    description: 'Calculate annual property taxes based on assessed value',
     href: '/calculator/tax/property',
     icon: Home,
     color: 'text-orange-500',
@@ -89,10 +137,18 @@ export const taxCalculators: CalculatorConfig[] = [
   },
   {
     name: 'Quarterly Tax Estimator',
-    description: 'Calculate estimated quarterly tax payments for self-employed and business income',
+    description: 'Calculate estimated quarterly tax payments',
     href: '/calculator/tax/quarterly',
     icon: Calculator,
     color: 'text-violet-500',
+    category: 'tax'
+  },
+  {
+    name: '401(k) Calculator',
+    description: 'Calculate projected 401(k) balance and tax savings',
+    href: '/calculator/tax/401k',
+    icon: PiggyBank,
+    color: 'text-cyan-500',
     category: 'tax'
   }
 ]
@@ -114,6 +170,22 @@ export const debtCalculators: CalculatorConfig[] = [
     icon: Wallet,
     color: 'bg-orange-500',
     category: 'debt'
+  },
+  {
+    name: 'Loan Calculator',
+    description: 'Calculate monthly payments and total cost for any type of loan',
+    href: '/calculator/debt/loan',
+    icon: Calculator,
+    color: 'bg-indigo-500',
+    category: 'debt'
+  },
+  {
+    name: 'Debt Consolidation',
+    description: 'Calculate potential savings from consolidating debts',
+    href: '/calculator/debt/consolidation',
+    icon: Wallet,
+    color: 'bg-violet-500',
+    category: 'debt'
   }
 ]
 
@@ -133,6 +205,30 @@ export const mortgageCalculators: CalculatorConfig[] = [
     href: '/calculator/mortgage/refinance',
     icon: Calculator,
     color: 'bg-green-500',
+    category: 'mortgage'
+  },
+  {
+    name: 'Home Affordability',
+    description: 'Calculate how much house you can afford based on your income and debts',
+    href: '/calculator/mortgage/home-affordability',
+    icon: Home,
+    color: 'bg-teal-500',
+    category: 'mortgage'
+  },
+  {
+    name: 'Mortgage Amortization Calculator',
+    description: 'Calculate your mortgage payment schedule and see how extra payments affect your loan',
+    href: '/calculator/mortgage/amortization',
+    icon: Calculator,
+    color: 'bg-purple-500',
+    category: 'mortgage'
+  },
+  {
+    name: 'Down Payment Calculator',
+    description: 'Calculate your required down payment and see how it affects your mortgage',
+    href: '/calculator/mortgage/down-payment',
+    icon: Calculator,
+    color: 'bg-indigo-500',
     category: 'mortgage'
   }
 ]
@@ -154,26 +250,50 @@ export const financialSavingsCalculators: CalculatorConfig[] = [
     icon: Wallet,
     color: 'bg-blue-500',
     category: 'financial-savings'
-  }
-]
-
-// Miscellaneous Calculators
-export const miscCalculators: CalculatorConfig[] = [
+  },
   {
-    name: 'Retirement Savings',
-    description: 'Plan your retirement savings and calculate needed contributions',
-    href: '/calculator/retirement/savings',
+    name: 'IRA Calculator',
+    description: 'Calculate your projected IRA balance at retirement including tax advantages',
+    href: '/calculator/financial-savings/ira',
     icon: PiggyBank,
-    color: 'bg-purple-500',
-    category: 'misc'
+    color: 'bg-teal-500',
+    category: 'financial-savings'
+  },
+  {
+    name: 'Pension Calculator',
+    description: 'Calculate your expected pension benefits based on years of service and salary',
+    href: '/calculator/financial-savings/pension',
+    icon: Calculator,
+    color: 'bg-sky-500',
+    category: 'financial-savings'
   },
   {
     name: 'Emergency Fund',
     description: 'Calculate how much emergency savings you need',
-    href: '/calculator/emergency/fund',
+    href: '/calculator/financial-savings/emergency-fund',
     icon: Shield,
     color: 'bg-yellow-500',
-    category: 'misc'
+    category: 'financial-savings'
+  },
+  {
+    name: 'Savings Goal Calculator',
+    description: 'Calculate how much you need to save monthly to reach your savings goal',
+    href: '/calculator/financial-savings/savings-goal',
+    icon: Target,
+    color: 'bg-rose-500',
+    category: 'financial-savings'
+  }
+]
+
+// Add new Business Related Calculators array
+export const businessRelatedCalculators: CalculatorConfig[] = [
+  {
+    name: 'Business Valuation',
+    description: 'Calculate business value using multiple valuation methods',
+    href: '/calculator/business-related/business-valuation',
+    icon: Briefcase,
+    color: 'bg-indigo-500',
+    category: 'business-related'
   },
   {
     name: 'Break-Even Analysis',
@@ -181,17 +301,70 @@ export const miscCalculators: CalculatorConfig[] = [
     href: '/calculator/business/break-even',
     icon: BarChart3,
     color: 'bg-blue-500',
+    category: 'business-related'
+  },
+  {
+    name: 'Cash Flow',
+    description: 'Calculate your business cash flow and ending cash position',
+    href: '/calculator/business-related/cash-flow',
+    icon: DollarSign,
+    color: 'bg-green-500',
+    category: 'business-related'
+  },
+  {
+    name: 'Estate Tax',
+    description: 'Calculate potential estate tax liability and plan for estate transfers',
+    href: '/calculator/business-related/estate-tax',
+    icon: Calculator,
+    color: 'bg-purple-500',
+    category: 'business-related'
+  },
+  {
+    name: 'Profit Margin Calculator',
+    description: 'Calculate profit margins and markup percentages for your business',
+    href: '/calculator/business-related/profit-margin',
+    icon: Calculator,
+    color: 'bg-orange-500',
+    category: 'business-related'
+  },
+  {
+    name: 'Asset Allocation Calculator',
+    description: 'Calculate and optimize your investment portfolio allocation across different asset classes',
+    href: '/calculator/business-related/asset-allocation',
+    icon: PieChart,
+    color: 'bg-violet-500',
+    category: 'business-related'
+  }
+]
+
+// Miscellaneous Calculators
+export const miscCalculators: CalculatorConfig[] = [
+  {
+    name: 'Wealth Management',
+    description: 'Track and optimize your wealth across different assets and income sources',
+    href: '/calculator/misc/wealth-management',
+    icon: Wallet,
+    color: 'bg-emerald-500',
+    category: 'misc'
+  },
+  {
+    name: 'Inheritance',
+    description: 'Calculate potential inheritance amount after taxes and expenses',
+    href: '/calculator/misc/inheritance',
+    icon: Calculator,
+    color: 'bg-blue-500',
     category: 'misc'
   }
 ]
 
 // Calculator categories
 export const calculatorCategories = {
-  roi: 'Return on Investment',
+  roi: 'Investment & ROI Calculators',
   tax: 'Tax Calculators',
   debt: 'Debt Management',
   mortgage: 'Mortgage Calculators',
   'financial-savings': 'Financial Savings',
+  'business-related': 'Business Related Calculators',
   misc: 'Other Calculators'
 } as const
 
@@ -202,5 +375,6 @@ export const calculators: CalculatorConfig[] = [
   ...debtCalculators,
   ...mortgageCalculators,
   ...financialSavingsCalculators,
+  ...businessRelatedCalculators,
   ...miscCalculators
 ]

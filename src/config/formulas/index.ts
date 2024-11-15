@@ -6,6 +6,8 @@ import { businessFormulas } from './business'
 import { emergencyFormulas } from './emergency'
 import { debtFormulas } from './debt'
 import { mortgageFormulas } from './mortgage'
+import { businessRelatedFormulas } from './business-related'
+import { financialSavingsFormulas } from './financial-savings'
 
 // Combine all calculator formulas with proper paths
 export const calculatorFormulas = {
@@ -32,7 +34,10 @@ export const calculatorFormulas = {
   'debt/credit-card': debtFormulas.creditCard,
   
   'mortgage/basic': mortgageFormulas.basic,
-  'mortgage/refinance': mortgageFormulas.refinance
+  'mortgage/refinance': mortgageFormulas.refinance,
+  
+  ...businessRelatedFormulas,
+  ...financialSavingsFormulas
 } as const
 
 export type CalculatorPath = keyof typeof calculatorFormulas
