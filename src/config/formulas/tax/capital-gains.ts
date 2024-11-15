@@ -37,7 +37,19 @@ const CAPITAL_GAINS_CONFIG = {
 
 export const capitalGainsTaxCalculator: Formula<CapitalGainsResult> = {
   name: 'Capital Gains Tax Calculator',
-  description: `Calculate your ${CAPITAL_GAINS_CONFIG.year} capital gains tax for both short-term and long-term investments`,
+  description: '',
+  longDescription: `
+    <p>Selling an asset? Use our Capital Gains Tax Calculator to figure out what taxes you'll owe on profits from real estate or stocks. This easy capital gains tax estimator simplifies the process of calculating capital gains tax on various investments, ensuring you're prepared when it comes time to file.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Short-term vs long-term gains analysis</li>
+      <li>Tax bracket consideration</li>
+      <li>Investment expense deductions</li>
+      <li>Net investment income tax calculations</li>
+      <li>State tax implications</li>
+    </ul>
+    <p>Use this calculator to make informed decisions about timing your investment sales and understanding your potential tax liability.</p>
+  `,
   variables: {
     purchasePrice: {
       label: 'Purchase Price',

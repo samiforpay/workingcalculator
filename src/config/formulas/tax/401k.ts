@@ -26,7 +26,19 @@ const FOUR_OH_ONE_K_CONFIG = {
 
 export const fourOhOneKCalculator: Formula<FourOhOneKResult> = {
   name: '401(k) Calculator',
-  description: 'Calculate your projected 401(k) balance at retirement including employer match',
+  description: '',
+  longDescription: `
+    <p>Maximize your retirement savings with our 401(k) Calculator! This 401(k) retirement savings calculator for 2024 helps you decide how much should I save in my 401(k). Use this simple 401(k) contribution calculator online to visualize your savings growth over time.</p>
+    <p>Key features:</p>
+    <ul>
+      <li>Calculate projected retirement balance</li>
+      <li>Account for employer matching contributions</li>
+      <li>Consider contribution limits and catch-up provisions</li>
+      <li>Analyze the impact of different investment returns</li>
+      <li>Compare different contribution scenarios</li>
+    </ul>
+    <p>Use this calculator to optimize your retirement savings strategy and make the most of your employer's matching contributions.</p>
+  `,
   variables: {
     currentBalance: {
       label: 'Current 401(k) Balance',

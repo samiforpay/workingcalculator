@@ -11,7 +11,17 @@ interface RefinanceResult extends Record<string, number> {
 
 export const refinanceCalculator: Formula<RefinanceResult> = {
   name: 'Mortgage Refinance Calculator',
-  description: 'Calculate potential savings from refinancing your mortgage',
+  description: '',
+  longDescription: `
+    <p>Discover potential savings with our Refinance Calculator. This easy refinance calculator helps you evaluate how much you can save by refinancing your existing mortgage. Input your current loan details and new interest rate to see a breakdown of your refinance mortgage payment options. Our refinance cost estimator also provides insights into associated costs, making it easier for you to decide if refinancing is the right choice</p>
+    <p>Use this calculator to:</p>
+    <ul>
+      <li>Compare your current mortgage payment with potential new payments</li>
+      <li>Calculate potential monthly savings from refinancing</li>
+      <li>Determine your break-even point considering closing costs</li>
+      <li>Evaluate total interest savings over the life of the loan</li>
+    </ul>
+  `,
   variables: {
     currentBalance: {
       label: 'Current Loan Balance',

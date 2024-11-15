@@ -5,9 +5,11 @@ interface RiskAssessmentResult extends Record<string, number | string> {
   sharpeRatio: number
   annualizedRisk: number
   riskAdjustedReturn: number
+  expectedReturn: number
+  standardDeviation: number
+  riskFreeRate: number
   riskCategoryName: string
   riskCategoryDescription: string
-  [key: string]: number | string
 }
 
 // Make rates and limits configurable for easy updates
@@ -39,7 +41,19 @@ const RISK_ASSESSMENT_CONFIG = {
 
 export const riskAssessmentCalculator: Formula<RiskAssessmentResult> = {
   name: 'Risk Assessment Calculator',
-  description: 'Evaluate investment risk and calculate risk-adjusted returns',
+  description: '',
+  longDescription: `
+    <p>Assessing risk is crucial in investing, and our Risk Assessment Calculator makes it easy! This personal risk assessment calculator is free and designed for individuals who want to evaluate their investment risks effectively. Learn how to use a risk assessment calculator to make informed decisions that align with your financial goals.</p>
+    <p>Risk metrics analyzed:</p>
+    <ul>
+      <li>Volatility measurement</li>
+      <li>Risk-adjusted returns</li>
+      <li>Sharpe ratio calculation</li>
+      <li>Maximum drawdown analysis</li>
+      <li>Risk tolerance assessment</li>
+    </ul>
+    <p>Understanding investment risk is crucial for building a portfolio that matches your risk tolerance and financial goals.</p>
+  `,
   variables: {
     expectedReturn: {
       label: 'Expected Annual Return (%)',

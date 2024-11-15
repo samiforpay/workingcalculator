@@ -1,8 +1,20 @@
 import type { Formula } from '@/config/formulas/types'
 
-export const savingsGoalCalculator: Formula = {
+export const savingsGoalCalculator: Formula<SavingsGoalResult> = {
   name: 'Savings Goal Calculator',
-  description: 'Calculate monthly savings needed to reach your financial goal',
+  description: '',
+  longDescription: `
+    <p>Achieve your financial aspirations with our Savings Goal Calculator. This savings target calculator guides you in setting and reaching specific savings goals by calculating how much you need to save monthly. Utilize the future savings goal estimator to visualize progress over time and stay motivated with our monthly savings goal calculator, helping you reach financial milestones effectively.</p>
+    <p>Calculations include:</p>
+    <ul>
+      <li>Required monthly savings amount</li>
+      <li>Impact of different interest rates</li>
+      <li>Time to reach your goal</li>
+      <li>Total contributions needed</li>
+      <li>Effect of initial savings</li>
+    </ul>
+    <p>Setting clear savings goals and understanding how to reach them is crucial for achieving your financial objectives. Use this calculator to create a realistic savings plan.</p>
+  `,
   variables: {
     targetAmount: {
       label: 'Target Amount',

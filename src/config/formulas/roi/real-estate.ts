@@ -10,7 +10,19 @@ interface RealEstateRoiResult extends Record<string, number> {
 
 export const realEstateRoiCalculator: Formula<RealEstateRoiResult> = {
   name: 'Real Estate ROI Calculator',
-  description: 'Calculate return on investment for real estate properties',
+  description: '',
+  longDescription: `
+    <p>The Real Estate ROI Calculator helps you evaluate the potential return on investment for real estate properties. This tool considers all aspects of real estate investing, including purchase costs, rental income, operating expenses, and potential appreciation.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Cash flow projections</li>
+      <li>Cap rate calculation</li>
+      <li>Cash-on-cash return</li>
+      <li>Total return on investment</li>
+      <li>Property appreciation scenarios</li>
+    </ul>
+    <p>Make better real estate investment decisions by understanding both the cash flow potential and total return of a property investment.</p>
+  `,
   variables: {
     purchasePrice: {
       label: 'Purchase Price',

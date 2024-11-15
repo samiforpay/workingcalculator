@@ -12,6 +12,16 @@ interface NetWorthResult extends Record<string, number> {
 
   debtToAssetRatio: number
 
+  liquidAssets: number
+
+  investmentAssets: number
+
+  personalAssets: number
+
+  shortTermDebt: number
+
+  longTermDebt: number
+
   [key: string]: number
 
 }
@@ -82,7 +92,29 @@ export const netWorthCalculator: Formula<NetWorthResult> = {
 
   name: 'Net Worth Calculator',
 
-  description: 'Calculate your total net worth by analyzing your assets and liabilities',
+  description: '',
+
+  longDescription: `
+
+    <p>Track your financial health with our Net Worth Calculator. This personal net worth estimator enables you to calculate your net worth online by inputting assets and liabilities. Use our net worth tracker tool for ongoing assessments or leverage the simple net worth calculator for quick evaluations, ensuring you're always aware of your financial standing.</p>
+
+    <p>What it tracks:</p>
+
+    <ul>
+
+      <li>Liquid Assets: Cash, savings, and easily convertible investments</li>
+
+      <li>Fixed Assets: Real estate, vehicles, and personal property</li>
+
+      <li>Investments: Stocks, bonds, retirement accounts</li>
+
+      <li>Liabilities: Mortgages, loans, credit card debt</li>
+
+    </ul>
+
+    <p>Regular monitoring of your net worth helps you track your financial progress and make informed decisions about saving, investing, and debt management.</p>
+
+  `,
 
   variables: {
 

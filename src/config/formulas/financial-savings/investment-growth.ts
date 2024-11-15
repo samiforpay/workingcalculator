@@ -29,7 +29,19 @@ const INVESTMENT_GROWTH_CONFIG = {
 
 export const investmentGrowthCalculator: Formula<InvestmentGrowthResult> = {
   name: 'Investment Growth Calculator',
-  description: 'Calculate how your investments grow over time with compound interest and regular contributions',
+  description: '',
+  longDescription: `
+    <p>Maximize your investment potential with our Investment Growth Calculator. This investment growth estimator helps you project the future value of your investments based on initial amounts, interest rates, and time frames. Utilize our compound interest growth calculator to understand how compounding can impact your returns over time and plan effectively with our long-term investment growth planner.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Future value projections</li>
+      <li>Compound interest calculations</li>
+      <li>Impact of contribution frequency</li>
+      <li>Different compounding periods</li>
+      <li>Total return breakdown</li>
+    </ul>
+    <p>Understanding investment growth potential helps you make informed decisions about your investment strategy and savings goals.</p>
+  `,
   variables: {
     initialInvestment: {
       label: 'Initial Investment',

@@ -31,7 +31,19 @@ const ESTATE_TAX_CONFIG = {
 
 export const estateTaxCalculator: Formula<EstateTaxResult> = {
   name: 'Estate Tax Calculator',
-  description: 'Calculate potential estate tax liability and plan for estate transfers',
+  description: '',
+  longDescription: `
+    <p>Planning for the future? Use our Estate Tax Calculator to navigate the complexities of estate taxes. This estate tax estimator tool lets you calculate estate taxes online, providing clarity on what you might owe. Our simple estate tax calculator is designed for ease of use, while the inheritance tax calculation tool helps you understand potential liabilities for heirs. Don’t forget to check out our estate planning tax calculator to ensure you're prepared.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Federal estate tax calculation</li>
+      <li>State estate tax estimation</li>
+      <li>Exemption analysis</li>
+      <li>Deduction planning</li>
+      <li>Gift tax integration</li>
+    </ul>
+    <p>Understanding your potential estate tax liability helps you plan effectively for wealth transfer and minimize tax impact on your heirs.</p>
+  `,
   variables: {
     grossEstate: {
       label: 'Gross Estate Value',

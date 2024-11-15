@@ -14,6 +14,9 @@ interface MortgageResult extends Record<string, number> {
 export const mortgageCalculator: Formula<MortgageResult> = {
   name: 'Mortgage Calculator',
   description: 'Calculate your monthly mortgage payments and total costs',
+  longDescription: `
+    <p>The Basic Mortgage Calculator is a simple tool designed to help you estimate your monthly mortgage payments. Whether you're a first-time homebuyer or looking to refinance, this easy mortgage payment calculator allows you to input your loan amount, interest rate, and term length to quickly determine what your payments will be. Use this basic home loan calculator for a quick overview of your mortgage costs and plan your budget effectively.</p>
+  `,
   variables: {
     homePrice: {
       label: 'Home Price',

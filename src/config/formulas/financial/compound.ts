@@ -1,8 +1,20 @@
 import type { Formula } from '@/config/formulas/types'
 
-export const compoundInterestCalculator: Formula = {
+export const compoundInterestCalculator: Formula<CompoundInterestResult> = {
   name: 'Compound Interest Calculator',
-  description: 'Calculate how your investments grow over time with compound interest',
+  description: '',
+  longDescription: `
+    <p>The Compound Interest Calculator helps you understand how your money can grow through the power of compound interest. This calculator shows you how your initial investment can grow over time when interest is earned not only on your initial principal but also on accumulated interest from previous periods.</p>
+    <p>Key features:</p>
+    <ul>
+      <li>Calculate future value with compound interest</li>
+      <li>Compare different compounding frequencies</li>
+      <li>See the impact of regular contributions</li>
+      <li>Analyze the effect of different interest rates</li>
+      <li>Understand the time value of money</li>
+    </ul>
+    <p>Use this calculator to see how compound interest can help accelerate your savings growth and achieve your financial goals faster.</p>
+  `,
   variables: {
     principal: {
       label: 'Initial Investment',

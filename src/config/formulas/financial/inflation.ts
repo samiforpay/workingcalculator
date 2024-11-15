@@ -1,8 +1,20 @@
 import type { Formula } from '@/config/formulas/types'
 
-export const inflationCalculator: Formula = {
-  name: 'Inflation Impact Calculator',
-  description: 'Calculate how inflation affects your purchasing power over time',
+export const inflationCalculator: Formula<InflationResult> = {
+  name: 'Inflation Calculator',
+  description: '',
+  longDescription: `
+    <p>The Inflation Calculator helps you understand how inflation affects your purchasing power over time. This tool shows you how the value of money changes and what your current dollars might be worth in the future, or what past dollars would be worth today.</p>
+    <p>Calculator features:</p>
+    <ul>
+      <li>Calculate future value adjusted for inflation</li>
+      <li>Compare purchasing power across different years</li>
+      <li>See historical inflation impact</li>
+      <li>Plan for future expenses</li>
+      <li>Adjust savings goals for inflation</li>
+    </ul>
+    <p>Understanding inflation's impact on your money helps you make better financial planning decisions and ensure your savings keep pace with rising costs.</p>
+  `,
   variables: {
     currentAmount: {
       label: 'Current Amount',

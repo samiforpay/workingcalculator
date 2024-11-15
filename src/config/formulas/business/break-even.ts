@@ -1,8 +1,27 @@
 import type { Formula } from '@/config/formulas/types'
 
-export const breakEvenCalculator: Formula = {
-  name: 'Break-Even Analysis Calculator',
-  description: 'Calculate your break-even point in units and revenue',
+interface BreakEvenResult extends Record<string, number> {
+  breakEvenUnits: number
+  breakEvenRevenue: number
+  contributionMargin: number
+  contributionMarginRatio: number
+}
+
+export const breakEvenCalculator: Formula<BreakEvenResult> = {
+  name: 'Break Even Calculator',
+  description: '',
+  longDescription: `
+    <p>The Break Even Calculator helps you determine the point at which your total revenue equals your total costs, resulting in neither profit nor loss. This essential business planning tool helps you understand how many units you need to sell or how much revenue you need to generate to cover your costs.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Break-even point in units</li>
+      <li>Break-even point in dollars</li>
+      <li>Fixed and variable cost analysis</li>
+      <li>Contribution margin calculation</li>
+      <li>Profit and loss projections</li>
+    </ul>
+    <p>Understanding your break-even point is crucial for pricing decisions, production planning, and overall business strategy.</p>
+  `,
   variables: {
     fixedCosts: {
       label: 'Fixed Costs',

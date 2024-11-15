@@ -40,8 +40,20 @@ const RETIREMENT_TAX_CONFIG = {
 }
 
 export const retirementContributionsCalculator: Formula<RetirementTaxResult> = {
-  name: 'Retirement Account Tax Benefits Calculator',
-  description: `Calculate your ${RETIREMENT_TAX_CONFIG.year} tax savings from retirement account contributions`,
+  name: 'Retirement Contributions Calculator',
+  description: '',
+  longDescription: `
+    <p>Planning for retirement? Our Retirement Contributions Calculator will guide you on how much you should contribute to your 401(k) or other retirement accounts. Use this free retirement savings contribution estimator to ensure you're on track for a comfortable retirement.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>401(k) contribution analysis</li>
+      <li>IRA contribution limits</li>
+      <li>Catch-up contribution eligibility</li>
+      <li>Tax savings estimation</li>
+      <li>Multiple account optimization</li>
+    </ul>
+    <p>Make informed decisions about your retirement savings strategy and understand how to maximize available tax benefits.</p>
+  `,
   variables: {
     annualIncome: {
       label: 'Annual Income',

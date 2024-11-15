@@ -26,7 +26,19 @@ const CASH_FLOW_CONFIG = {
 
 export const cashFlowCalculator: Formula<CashFlowResult> = {
   name: 'Cash Flow Calculator',
-  description: 'Calculate your business cash flow and ending cash position',
+  description: '',
+  longDescription: `
+    <p>Managing your finances just got easier with our Cash Flow Calculator. This monthly cash flow estimator helps you keep track of your income and expenses, giving you a clear picture of your financial health. With our cash flow projection calculator, you can plan for the future by analyzing your cash inflow and outflow. It's the perfect personal cash flow analysis tool to help you make informed decisions about your spending and saving.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Operating cash flow</li>
+      <li>Cash flow ratios</li>
+      <li>Working capital analysis</li>
+      <li>Cash conversion cycle</li>
+      <li>Liquidity projections</li>
+    </ul>
+    <p>Maintaining healthy cash flow is crucial for business success. Use this calculator to monitor your cash position and make informed financial decisions.</p>
+  `,
   variables: {
     startingCash: {
       label: 'Starting Cash Balance',

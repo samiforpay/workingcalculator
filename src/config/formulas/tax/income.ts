@@ -1,6 +1,6 @@
-import type { Formula } from '@/config/formulas/types'
+import type { Formula, BaseResult } from '@/config/formulas/types'
 
-interface IncomeTaxResult extends Record<string, number> {
+interface IncomeTaxResult extends BaseResult {
   taxableIncome: number
   federalTax: number
   stateTax: number
@@ -10,7 +10,8 @@ interface IncomeTaxResult extends Record<string, number> {
   takeHomePay: number
   monthlyTakeHome: number
   taxByBracket: Record<string, number>
-  [key: string]: number | Record<string, number>
+  socialSecurityTax: number
+  medicareTax: number
 }
 
 // Make tax brackets configurable for easy updates
@@ -50,7 +51,19 @@ const TAX_CONFIG = {
 
 export const incomeTaxCalculator: Formula<IncomeTaxResult> = {
   name: 'Income Tax Calculator',
-  description: `Calculate your ${TAX_CONFIG.year} federal and state income tax based on current tax brackets`,
+  description: '',
+  longDescription: `
+    <p>Get ready for tax season with our Income Tax Calculator! This 2024 income tax calculator for individuals helps you estimate what you'll owe or what you'll get back as a refund. Find out how to estimate your income tax refund quickly using our free income tax calculator that covers all states.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Federal tax bracket analysis</li>
+      <li>State tax calculations</li>
+      <li>FICA taxes (Social Security and Medicare)</li>
+      <li>Standard and itemized deductions</li>
+      <li>Tax credits consideration</li>
+    </ul>
+    <p>Use this calculator to plan your tax strategy, estimate quarterly payments, or understand how different income levels affect your tax liability.</p>
+  `,
   variables: {
     grossIncome: {
       label: 'Annual Gross Income',

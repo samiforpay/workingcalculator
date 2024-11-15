@@ -29,7 +29,19 @@ const PROPERTY_TAX_CONFIG = {
 
 export const propertyTaxCalculator: Formula<PropertyTaxResult> = {
   name: 'Property Tax Calculator',
-  description: `Calculate your ${PROPERTY_TAX_CONFIG.year} property taxes based on local rates`,
+  description: '',
+  longDescription: `
+    <p>Homeowners rejoice! Our Property Tax Calculator helps you estimate property taxes based on local rates and property values. Use this property tax estimator for homeowners or learn how to calculate property taxes in [your state] easily with our online property tax calculator tool.</p>
+    <p>Calculator includes:</p>
+    <ul>
+      <li>Property value assessment calculations</li>
+      <li>Homestead and other exemptions</li>
+      <li>Multiple tax district rates</li>
+      <li>Special assessments and fees</li>
+      <li>Monthly payment estimates for escrow</li>
+    </ul>
+    <p>Use this calculator to budget for property taxes, understand your tax bill, or evaluate the tax impact of property improvements.</p>
+  `,
   variables: {
     marketValue: {
       label: 'Property Market Value',

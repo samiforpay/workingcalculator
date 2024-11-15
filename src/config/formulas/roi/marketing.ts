@@ -10,7 +10,19 @@ interface MarketingRoiResult extends Record<string, number> {
 
 export const marketingRoiCalculator: Formula<MarketingRoiResult> = {
   name: 'Marketing ROI Calculator',
-  description: 'Calculate the return on investment for your marketing campaigns',
+  description: '',
+  longDescription: `
+    <p>The Marketing ROI Calculator helps you evaluate the effectiveness of your marketing campaigns by measuring the return on your marketing investments. This tool helps you track and analyze various marketing metrics to determine which campaigns are most profitable.</p>
+    <p>Key metrics analyzed:</p>
+    <ul>
+      <li>Campaign revenue generation</li>
+      <li>Cost per acquisition (CPA)</li>
+      <li>Return on ad spend (ROAS)</li>
+      <li>Customer lifetime value (CLV)</li>
+      <li>Marketing efficiency ratio</li>
+    </ul>
+    <p>Understanding your marketing ROI helps you optimize your marketing budget and focus on the most effective channels and campaigns.</p>
+  `,
   variables: {
     marketingCost: {
       label: 'Marketing Campaign Cost',

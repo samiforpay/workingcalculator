@@ -606,7 +606,199 @@ export const homeAffordabilityCalculator: Formula<HomeAffordabilityResult> = {
 
 
 
-  description: 'Calculate how much house you can afford based on your income and debts',
+  description: '',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  longDescription: `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Find out how much house you can afford with our Home Affordability Calculator. This affordable home price calculator takes into account your income, debts, and down payment to provide a clear estimate of the home price range that fits your budget. Ideal for first-time homebuyers, this home affordability estimator guides you in making informed decisions about your future home purchase.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Factors considered:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li>Income and debt ratios</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li>Down payment amount</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li>Property taxes and insurance</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li>Monthly debt obligations</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <li>Interest rates and loan terms</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>Make informed decisions about your home purchase by understanding your price range and monthly payment capabilities.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`,
 
 
 
@@ -942,6 +1134,7 @@ export const homeAffordabilityCalculator: Formula<HomeAffordabilityResult> = {
 
 
 
+
       defaultValue: HOME_AFFORDABILITY_CONFIG.defaults.interestRate,
 
 
@@ -1055,6 +1248,7 @@ export const homeAffordabilityCalculator: Formula<HomeAffordabilityResult> = {
 
 
       type: 'number',
+
 
 
 

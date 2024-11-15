@@ -33,7 +33,19 @@ const IRA_CONFIG = {
 
 export const iraCalculator: Formula<IraResult> = {
   name: 'IRA Calculator',
-  description: 'Calculate your projected IRA balance at retirement including tax advantages',
+  description: '',
+  longDescription: `
+    <p>Plan for retirement with confidence using our IRA Calculator. This simple IRA calculator helps you estimate your potential retirement savings based on contributions to both traditional and Roth IRAs. Discover how different contribution levels affect growth over time with our IRA contribution calculator and plan effectively with our IRA retirement savings estimator.</p>
+    <p>Calculator features:</p>
+    <ul>
+      <li>Project retirement account growth over time</li>
+      <li>Compare Traditional vs Roth IRA benefits</li>
+      <li>Account for annual contribution limits</li>
+      <li>Consider catch-up contributions for those 50 and older</li>
+      <li>Estimate tax advantages of different IRA types</li>
+    </ul>
+    <p>Use this tool to optimize your retirement savings strategy and ensure you're on track to meet your retirement goals.</p>
+  `,
   variables: {
     currentBalance: {
       label: 'Current IRA Balance',

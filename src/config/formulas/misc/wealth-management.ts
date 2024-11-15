@@ -38,7 +38,19 @@ const WEALTH_MANAGEMENT_CONFIG = {
 
 export const wealthManagementCalculator: Formula<WealthManagementResult> = {
   name: 'Wealth Management Calculator',
-  description: 'Track and optimize your wealth across different assets and income sources',
+  description: '',
+  longDescription: `
+    <p>The Wealth Management Calculator helps you track and optimize your wealth across different assets and income sources. This tool provides a comprehensive view of your financial position and helps identify opportunities for growth and optimization.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Asset allocation analysis</li>
+      <li>Income diversification</li>
+      <li>Investment performance tracking</li>
+      <li>Risk assessment</li>
+      <li>Tax efficiency evaluation</li>
+    </ul>
+    <p>Regular wealth management analysis helps ensure your financial strategy remains aligned with your goals and adapts to changing market conditions.</p>
+  `,
   variables: {
     // Income Sources
     salary: {

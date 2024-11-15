@@ -38,7 +38,19 @@ const DOWN_PAYMENT_CONFIG = {
 
 export const downPaymentCalculator: Formula<DownPaymentResult> = {
   name: 'Down Payment Calculator',
-  description: 'Calculate your required down payment and see how it affects your mortgage',
+  description: '',
+  longDescription: `
+    <p>Calculate how much you need to save for a down payment with our Down Payment Calculator. This down payment savings calculator allows you to determine the percentage required based on your desired home price. Whether you're asking yourself how much to save for a down payment or looking for down payment assistance options, this tool provides valuable insights to help you reach your homeownership goals.</p>
+    <p>Calculator includes:</p>
+    <ul>
+      <li>Minimum down payment requirements</li>
+      <li>PMI threshold analysis</li>
+      <li>Different loan type options</li>
+      <li>Monthly payment estimates</li>
+      <li>Total upfront cost calculation</li>
+    </ul>
+    <p>Planning your down payment is a crucial step in the home buying process. Use this calculator to set savings goals and understand different down payment scenarios.</p>
+  `,
   variables: {
     purchasePrice: {
       label: 'Home Purchase Price',

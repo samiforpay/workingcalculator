@@ -1,10 +1,10 @@
 import type { Formula } from '@/config/formulas/types'
 
 interface SalesTaxResult extends Record<string, number> {
-  subtotal: number
-  salesTax: number
-  totalCost: number
-  effectiveRate: number
+  totalTax: number
+  totalPrice: number
+  stateTax: number
+  localTax: number
   [key: string]: number
 }
 
@@ -26,7 +26,19 @@ const SALES_TAX_CONFIG = {
 
 export const salesTaxCalculator: Formula<SalesTaxResult> = {
   name: 'Sales Tax Calculator',
-  description: `Calculate total cost including ${SALES_TAX_CONFIG.year} sales tax based on local rates`,
+  description: '',
+  longDescription: `
+    <p>Shopping made easier! Use our Sales Tax Calculator by state in 2024 to quickly determine the sales tax on purchases. Learn how to calculate sales tax simply so you can budget accurately before making any big purchases with this straightforward sales tax estimation tool.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>State and local tax calculations</li>
+      <li>Tax-exempt item handling</li>
+      <li>Multiple item calculations</li>
+      <li>Special district taxes</li>
+      <li>Tax holiday considerations</li>
+    </ul>
+    <p>Use this calculator to budget for purchases and understand the full cost including all applicable taxes.</p>
+  `,
   variables: {
     subtotal: {
       label: 'Purchase Amount',

@@ -1,10 +1,7 @@
 import type { Formula } from '@/config/formulas/types'
 
 interface QuarterlyTaxResult extends Record<string, number> {
-  q1Payment: number
-  q2Payment: number
-  q3Payment: number
-  q4Payment: number
+  quarterlyPayment: number
   totalTax: number
   effectiveRate: number
   [key: string]: number
@@ -43,8 +40,20 @@ const QUARTERLY_TAX_CONFIG = {
 }
 
 export const quarterlyTaxCalculator: Formula<QuarterlyTaxResult> = {
-  name: 'Quarterly Tax Estimator',
-  description: `Calculate your ${QUARTERLY_TAX_CONFIG.year} estimated quarterly tax payments`,
+  name: 'Quarterly Tax Calculator',
+  description: '',
+  longDescription: `
+    <p>Freelancers and business owners can simplify their finances with our Quarterly Tax Calculator. This quarterly estimated tax payment calculator helps you determine what you need to pay each quarter based on income projections. Learn how to calculate quarterly taxes effectively with this free quarterly tax estimator tool.</p>
+    <p>Calculator includes:</p>
+    <ul>
+      <li>Estimated tax payment calculations</li>
+      <li>Self-employment tax estimation</li>
+      <li>Safe harbor payment analysis</li>
+      <li>Payment deadline tracking</li>
+      <li>Annual tax projection</li>
+    </ul>
+    <p>Stay compliant with IRS requirements and manage your cash flow effectively by planning your quarterly tax payments.</p>
+  `,
   variables: {
     projectedIncome: {
       label: 'Projected Annual Income',

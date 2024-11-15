@@ -27,7 +27,19 @@ const STOCK_TRADING_CONFIG = {
 
 export const stockTradingCalculator: Formula<StockTradingResult> = {
   name: 'Stock Trading Calculator',
-  description: 'Calculate profit/loss and returns from stock trades including fees',
+  description: '',
+  longDescription: `
+    <p>The Stock Trading Calculator helps you analyze potential profits and losses from stock trades, taking into account purchase price, selling price, commissions, and other fees. This tool is essential for understanding the true cost and potential return of your stock trades.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Profit/Loss calculation per trade</li>
+      <li>Commission and fee analysis</li>
+      <li>Break-even price calculation</li>
+      <li>Return on investment (ROI) percentage</li>
+      <li>Total cost basis computation</li>
+    </ul>
+    <p>Use this calculator to make informed trading decisions and understand the impact of fees and commissions on your trading returns.</p>
+  `,
   variables: {
     costPrice: {
       label: 'Purchase Price Per Share',

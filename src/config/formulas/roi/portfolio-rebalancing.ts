@@ -40,7 +40,19 @@ const PORTFOLIO_REBALANCING_CONFIG = {
 
 export const portfolioRebalancingCalculator: Formula<PortfolioRebalancingResult> = {
   name: 'Portfolio Rebalancing Calculator',
-  description: 'Calculate adjustments needed to maintain your target asset allocation',
+  description: '',
+  longDescription: `
+    <p>Keep your investments on track with our Portfolio Rebalancing Calculator. Not sure how to use a portfolio rebalancing calculator? This user-friendly tool simplifies the process for beginners and seasoned investors alike. Discover the best portfolio rebalancing calculator that fits your needs and take advantage of our free online portfolio rebalancing calculator tool to maintain an optimal asset mix.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Current vs target allocation comparison</li>
+      <li>Required trades calculation</li>
+      <li>Drift analysis</li>
+      <li>Multiple asset class support</li>
+      <li>Tax-efficient rebalancing suggestions</li>
+    </ul>
+    <p>Regular portfolio rebalancing helps maintain your desired risk level and can improve long-term investment returns through disciplined buying and selling.</p>
+  `,
   variables: {
     // Current Allocations
     currentStocks: {

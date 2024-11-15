@@ -5,7 +5,9 @@ interface AmortizationResult extends Record<string, number | AmortizationSchedul
   totalPayments: number
   totalInterest: number
   schedule: AmortizationSchedule[]
-  [key: string]: number | AmortizationSchedule[]
+  loanAmount: number
+  actualTerm: number
+  totalPaid: number
 }
 
 interface AmortizationSchedule {
@@ -35,7 +37,19 @@ const AMORTIZATION_CONFIG = {
 
 export const amortizationCalculator: Formula<AmortizationResult> = {
   name: 'Mortgage Amortization Calculator',
-  description: 'Calculate your mortgage payment schedule and see how extra payments affect your loan',
+  description: '',
+  longDescription: `
+    <p>Plan your mortgage payments effectively with our Mortgage Amortization Calculator. This simple mortgage amortization calculator generates an amortization schedule that outlines your monthly payments over the life of the loan. Use our loan amortization planner to visualize how much principal and interest you'll pay each month, and access a detailed amortization table generator for comprehensive insights into your mortgage repayment journey.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Monthly payment breakdown</li>
+      <li>Principal vs interest allocation</li>
+      <li>Loan payoff schedule</li>
+      <li>Extra payment analysis</li>
+      <li>Total interest savings calculations</li>
+    </ul>
+    <p>Understanding your mortgage amortization schedule helps you make informed decisions about extra payments and refinancing opportunities.</p>
+  `,
   variables: {
     loanAmount: {
       label: 'Loan Amount',

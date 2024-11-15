@@ -1,12 +1,15 @@
-import type { Formula } from '@/config/formulas/types'
+import type { Formula, BaseResult } from '@/config/formulas/types'
 
-interface ProfitMarginResult extends Record<string, number> {
+interface ProfitMarginResult extends BaseResult {
   netProfit: number
   grossProfit: number
   netProfitMargin: number
   grossProfitMargin: number
   markupPercentage: number
-  [key: string]: number
+  totalCosts: number
+  revenue: number
+  costOfGoods: number
+  operatingExpenses: number
 }
 
 // Make rates and limits configurable for easy updates
@@ -27,7 +30,19 @@ const PROFIT_MARGIN_CONFIG = {
 
 export const profitMarginCalculator: Formula<ProfitMarginResult> = {
   name: 'Profit Margin Calculator',
-  description: 'Calculate profit margins and markup percentages for your business',
+  description: '',
+  longDescription: `
+    <p>Maximize your profits with our Profit Margin Calculator. This handy tool allows you to easily calculate profit margin percentages and analyze your business's profitability. Whether you're a small business owner or managing a large enterprise, our net profit margin estimator will help you understand your financial performance better. Use this profitability analysis tool to make informed pricing decisions and boost your bottom line.</p>
+    <p>Key metrics calculated:</p>
+    <ul>
+      <li>Gross Profit Margin: Revenue minus cost of goods sold</li>
+      <li>Net Profit Margin: Profit after all expenses</li>
+      <li>Operating Margin: Profit from core business operations</li>
+      <li>Markup Percentage: Price increase over cost</li>
+      <li>Break-even Analysis: Point where revenue equals costs</li>
+    </ul>
+    <p>Use this calculator to optimize your pricing strategy, control costs, and improve your business's overall profitability.</p>
+  `,
   variables: {
     revenue: {
       label: 'Revenue',
@@ -60,20 +75,12 @@ export const profitMarginCalculator: Formula<ProfitMarginResult> = {
   calculate: (inputs) => {
     const { revenue, costOfGoods, operatingExpenses } = inputs
 
-    // Calculate total costs
     const totalCosts = costOfGoods + operatingExpenses
-
-    // Calculate gross profit (revenue - COGS)
     const grossProfit = revenue - costOfGoods
-
-    // Calculate net profit (gross profit - operating expenses)
     const netProfit = grossProfit - operatingExpenses
-
-    // Calculate profit margins
+    
     const grossProfitMargin = (grossProfit / revenue) * 100
     const netProfitMargin = (netProfit / revenue) * 100
-
-    // Calculate markup percentage
     const markupPercentage = ((revenue - costOfGoods) / costOfGoods) * 100
 
     return {

@@ -25,7 +25,19 @@ const EMERGENCY_FUND_CONFIG = {
 
 export const emergencyFundCalculator: Formula<EmergencyFundResult> = {
   name: 'Emergency Fund Calculator',
-  description: 'Calculate how much emergency savings you need',
+  description: '',
+  longDescription: `
+    <p>The Emergency Fund Calculator helps you determine how much money you should set aside for unexpected expenses and financial emergencies. This tool considers your monthly expenses, income stability, and personal circumstances to recommend an appropriate emergency fund size.</p>
+    <p>Factors considered:</p>
+    <ul>
+      <li>Monthly essential expenses</li>
+      <li>Income stability assessment</li>
+      <li>Number of income earners</li>
+      <li>Insurance coverage levels</li>
+      <li>Existing emergency savings</li>
+    </ul>
+    <p>Having an adequate emergency fund is crucial for financial security and peace of mind. Use this calculator to set appropriate savings goals and track your progress.</p>
+  `,
   variables: {
     monthlyIncome: {
       label: 'Monthly Income',

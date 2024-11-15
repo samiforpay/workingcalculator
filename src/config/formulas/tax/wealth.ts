@@ -3,8 +3,9 @@ import type { Formula } from '@/config/formulas/types'
 interface WealthTaxResult extends Record<string, number> {
   totalTax: number
   effectiveRate: number
-  taxByBracket: Record<string, number>
-  [key: string]: number | Record<string, number>
+  taxableWealth: number
+  exemptionAmount: number
+  [key: string]: number
 }
 
 // Make tax brackets configurable for easy updates
@@ -114,9 +115,8 @@ export const wealthTaxCalculator: Formula<WealthTaxResult> = {
     return {
       totalTax,
       effectiveRate,
-      taxByBracket,
       taxableWealth,
-      totalExemptions
+      exemptionAmount: totalExemptions
     }
   },
   formatResult: (result) => {
@@ -141,7 +141,7 @@ export const wealthTaxCalculator: Formula<WealthTaxResult> = {
 Wealth Tax Analysis (${WEALTH_TAX_CONFIG.year}):
 ----------------------------------------
 Taxable Wealth: ${formatter.format(result.taxableWealth)}
-Total Exemptions: ${formatter.format(result.totalExemptions)}
+Total Exemptions: ${formatter.format(result.exemptionAmount)}
 
 ${breakdownByBracket}
 Summary:

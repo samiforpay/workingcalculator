@@ -78,7 +78,20 @@ export const pensionCalculator: Formula<PensionResult> = {
 
   name: 'Pension Calculator',
 
-  description: 'Calculate your expected pension benefits based on years of service and salary',
+  description: '',
+
+  longDescription: `
+    <p>Understand your retirement benefits better with our Pension Calculator. This pension payout calculator provides estimates on how much you can expect from your pension upon retirement. Use the pension benefits estimator to evaluate different scenarios based on contributions and years of service, ensuring you're prepared for a secure retirement.</p>
+    <p>Calculations include:</p>
+    <ul>
+      <li>Monthly pension payment estimates</li>
+      <li>Final average salary calculations</li>
+      <li>Years of service multiplier effects</li>
+      <li>Early retirement impact analysis</li>
+      <li>Survivor benefit options</li>
+    </ul>
+    <p>Understanding your pension benefits helps you better plan for retirement and make informed decisions about timing and benefit options.</p>
+  `,
 
   variables: {
 

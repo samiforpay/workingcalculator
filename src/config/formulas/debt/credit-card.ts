@@ -14,7 +14,19 @@ interface CreditCardPayoffResult {
 
 export const creditCardPayoffCalculator: Formula<CreditCardPayoffResult> = {
   name: 'Credit Card Payoff Calculator',
-  description: 'Calculate how long it will take to pay off your credit card debt',
+  description: '',
+  longDescription: `
+    <p>Tired of credit card debt? Our Credit Card Payoff Calculator can help! This free credit card payoff timeline calculator shows how long it will take to pay off your balance based on different payment amounts. Discover how to calculate credit card payments and interest easily with the best credit card payoff estimator available online.</p>
+    <p>Key insights:</p>
+    <ul>
+      <li>Time to become debt-free</li>
+      <li>Total interest savings</li>
+      <li>Impact of extra payments</li>
+      <li>Monthly payment requirements</li>
+      <li>Debt-free date projection</li>
+    </ul>
+    <p>Take control of your credit card debt by understanding how different payment strategies can accelerate your path to becoming debt-free.</p>
+  `,
   variables: {
     balance: {
       label: 'Current Balance',

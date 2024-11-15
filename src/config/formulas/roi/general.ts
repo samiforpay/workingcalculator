@@ -1,8 +1,20 @@
 import type { Formula } from '@/config/formulas/types'
 
-export const generalRoiCalculator: Formula = {
+export const generalRoiCalculator: Formula<GeneralRoiResult> = {
   name: 'General ROI Calculator',
-  description: 'Calculate return on investment for various scenarios',
+  description: '',
+  longDescription: `
+    <p>The General ROI Calculator helps you evaluate the profitability of any investment or project by comparing the gains to the initial costs. This versatile tool can be used for analyzing various types of investments, from business projects to personal investments.</p>
+    <p>Features included:</p>
+    <ul>
+      <li>Basic ROI calculation</li>
+      <li>Time-adjusted returns</li>
+      <li>Break-even analysis</li>
+      <li>Comparison of multiple investments</li>
+      <li>Risk-adjusted returns</li>
+    </ul>
+    <p>Understanding ROI is crucial for making informed investment decisions and prioritizing different opportunities. Use this calculator to evaluate and compare different investment options.</p>
+  `,
   variables: {
     initialInvestment: {
       label: 'Initial Investment',

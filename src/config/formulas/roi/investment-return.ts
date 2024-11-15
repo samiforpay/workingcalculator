@@ -25,7 +25,19 @@ const INVESTMENT_RETURN_CONFIG = {
 
 export const investmentReturnCalculator: Formula<InvestmentReturnResult> = {
   name: 'Investment Return Calculator',
-  description: 'Calculate your total and annualized returns on investments',
+  description: '',
+  longDescription: `
+    <p>Curious about how your investments will grow? Our Investment Returns Calculator provides a straightforward way to estimate your future investment value. With this investment growth rate calculator, you can see how different rates of return affect your portfolio over time. Easily calculate investment returns and understand the impact of compound interest with our compound interest returns calculator—perfect for long-term planning.</p>
+    <p>Key metrics calculated:</p>
+    <ul>
+      <li>Total Return on Investment (ROI)</li>
+      <li>Annualized Rate of Return</li>
+      <li>Real Return (Adjusted for Inflation)</li>
+      <li>Income Return (Dividends/Interest)</li>
+      <li>Capital Gains Return</li>
+    </ul>
+    <p>Use this calculator to evaluate investment performance and make informed decisions about your portfolio management strategy.</p>
+  `,
   variables: {
     initialInvestment: {
       label: 'Initial Investment',

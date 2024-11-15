@@ -37,7 +37,19 @@ const INHERITANCE_CONFIG = {
 
 export const inheritanceCalculator: Formula<InheritanceResult> = {
   name: 'Inheritance Calculator',
-  description: 'Calculate potential inheritance amount after taxes and expenses',
+  description: '',
+  longDescription: `
+    <p>The Inheritance Calculator helps you estimate potential inheritance amounts and understand tax implications. This tool considers estate value, number of heirs, taxes, and other factors to provide a clear picture of inheritance distribution.</p>
+    <p>Calculations include:</p>
+    <ul>
+      <li>Individual inheritance shares</li>
+      <li>Tax liability estimation</li>
+      <li>Estate distribution analysis</li>
+      <li>Beneficiary allocation</li>
+      <li>Net inheritance calculation</li>
+    </ul>
+    <p>Understanding inheritance calculations helps in estate planning and managing expectations for wealth transfer.</p>
+  `,
   variables: {
     estateValue: {
       label: 'Total Estate Value',

@@ -8,18 +8,18 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useAnnouncement } from '@/contexts/AnnouncementContext'
-import type { Formula, Variable } from '@/config/formulas/types'
+import type { Formula, Variable, BaseResult } from '@/config/formulas/types'
 
-interface CalculatorFormProps {
-  formula: Formula
+interface CalculatorFormProps<T extends BaseResult> {
+  formula: Formula<T>
   onCalculate: (inputs: Record<string, number>) => Promise<void>
   isCalculating?: boolean
 }
 
-export function CalculatorForm({ formula, onCalculate, isCalculating }: CalculatorFormProps) {
-  const [values, setValues] = useState(() => {
+export function CalculatorForm<T extends BaseResult>({ formula, onCalculate, isCalculating }: CalculatorFormProps<T>) {
+  const [values, setValues] = useState<Record<string, number>>(() => {
     return Object.entries(formula.variables).reduce((acc, [name, variable]) => {
-      acc[name] = variable.defaultValue
+      acc[name] = Number(variable.defaultValue)
       return acc
     }, {} as Record<string, number>)
   })

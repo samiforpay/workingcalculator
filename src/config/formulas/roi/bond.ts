@@ -33,7 +33,19 @@ const BOND_CONFIG = {
 
 export const bondCalculator: Formula<BondResult> = {
   name: 'Bond Calculator',
-  description: 'Calculate bond yields, payments, and returns',
+  description: '',
+  longDescription: `
+    <p>Investing in bonds? Our Bond Calculator is an essential tool for understanding bond yields and prices. Use this bond yield calculator for fixed income investments or learn how to calculate bond prices and yields simply. It’s a straightforward resource for both novice and experienced investors looking to optimize their bond portfolios.</p>
+    <p>Calculations include:</p>
+    <ul>
+      <li>Yield to maturity (YTM)</li>
+      <li>Current yield</li>
+      <li>Bond price calculations</li>
+      <li>Interest payment schedules</li>
+      <li>Duration and convexity measures</li>
+    </ul>
+    <p>Understanding bond metrics helps you make informed decisions about fixed-income investments and manage interest rate risk in your portfolio.</p>
+  `,
   variables: {
     parValue: {
       label: 'Par Value',

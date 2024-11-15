@@ -34,7 +34,19 @@ const OPTIONS_TRADING_CONFIG = {
 
 export const optionsTradingCalculator: Formula<OptionsResult> = {
   name: 'Options Trading Calculator',
-  description: 'Calculate potential profits and losses for call and put options',
+  description: '',
+  longDescription: `
+    <p>Enhance your trading strategy with our Options Trading Calculator. Designed for beginners, this options trading profit calculator helps you determine potential returns from various trades. Learn how to calculate options trading returns effortlessly and discover why this is considered one of the best options trading calculators online.</p>
+    <p>Calculations include:</p>
+    <ul>
+      <li>Break-even points</li>
+      <li>Maximum profit potential</li>
+      <li>Maximum loss exposure</li>
+      <li>Return on investment</li>
+      <li>Greeks (Delta, Gamma, Theta, Vega)</li>
+    </ul>
+    <p>Understanding options metrics and potential outcomes is crucial for successful options trading. Use this calculator to evaluate different strategies and manage risk effectively.</p>
+  `,
   variables: {
     currentPrice: {
       label: 'Current Share Price',

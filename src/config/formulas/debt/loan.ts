@@ -25,7 +25,19 @@ const LOAN_CONFIG = {
 
 export const loanCalculator: Formula<LoanResult> = {
   name: 'Loan Calculator',
-  description: 'Calculate monthly payments and total cost for any type of loan',
+  description: '',
+  longDescription: `
+    <p>Need help managing loans? Our Loan Calculator is here for you! This personal loan monthly payment calculator offers a clear view of what you'll owe each month based on loan terms and interest rates. Learn how to calculate loan payments and interest rates accurately using this loan repayment schedule calculator tool.</p>
+    <p>Calculator features:</p>
+    <ul>
+      <li>Monthly payment calculation</li>
+      <li>Total interest cost analysis</li>
+      <li>Amortization schedule generation</li>
+      <li>Early payoff scenarios</li>
+      <li>Payment breakdown visualization</li>
+    </ul>
+    <p>Understanding your loan terms and costs helps you make informed borrowing decisions and plan your budget effectively.</p>
+  `,
   variables: {
     loanAmount: {
       label: 'Loan Amount',

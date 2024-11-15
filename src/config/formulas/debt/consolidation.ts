@@ -32,7 +32,19 @@ const DEBT_CONSOLIDATION_CONFIG = {
 
 export const debtConsolidationCalculator: Formula<DebtConsolidationResult> = {
   name: 'Debt Consolidation Calculator',
-  description: 'Calculate potential savings from consolidating multiple debts into a single loan',
+  description: '',
+  longDescription: `
+    <p>Considering debt consolidation? Our Debt Consolidation Calculator can show you potential savings! This free debt consolidation savings calculator helps evaluate whether consolidating debts makes sense for you financially. Find out how much can I save with debt consolidation using this easy online debt consolidation estimator tool.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Total monthly payment comparison</li>
+      <li>Interest savings calculation</li>
+      <li>Payoff time comparison</li>
+      <li>Break-even point analysis</li>
+      <li>Total cost comparison</li>
+    </ul>
+    <p>Use this calculator to determine if debt consolidation could help you save money and simplify your debt repayment strategy.</p>
+  `,
   variables: {
     // Credit Card Debt
     creditCardDebt: {

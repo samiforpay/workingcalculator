@@ -10,7 +10,19 @@ interface BusinessRoiResult extends Record<string, number> {
 
 export const businessRoiCalculator: Formula<BusinessRoiResult> = {
   name: 'Business ROI Calculator',
-  description: 'Calculate return on investment for business projects',
+  description: '',
+  longDescription: `
+    <p>The Business ROI Calculator helps you evaluate the return on investment for business projects, equipment purchases, marketing campaigns, and other business investments. This specialized tool considers various business-specific factors to provide a comprehensive analysis of your investment's potential returns.</p>
+    <p>Analysis includes:</p>
+    <ul>
+      <li>Project profitability metrics</li>
+      <li>Payback period calculation</li>
+      <li>Net Present Value (NPV)</li>
+      <li>Internal Rate of Return (IRR)</li>
+      <li>Cost-benefit analysis</li>
+    </ul>
+    <p>Make better business investment decisions by understanding the full financial impact of your choices. This calculator helps you evaluate both short-term and long-term returns on business investments.</p>
+  `,
   variables: {
     initialInvestment: {
       label: 'Initial Investment',

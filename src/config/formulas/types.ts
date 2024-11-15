@@ -1,30 +1,31 @@
 import { LucideIcon } from 'lucide-react'
 
 // Basic types
-export type VariableType = 
-  | 'currency' 
-  | 'percentage' 
-  | 'number' 
-  | 'select' 
-  | 'boolean'
+export type VariableType = 'currency' | 'percentage' | 'number' | 'select' | 'boolean'
 
 export interface Variable {
   label: string
   type: VariableType
-  defaultValue: number | boolean
+  defaultValue: number
   min?: number
-  max?: number | ((inputs: Record<string, number>) => number)
+  max?: number
   step?: number | 'any'
   helpText?: string
   options?: { label: string; value: number }[]
-  isSection?: boolean
   dependsOn?: string
+  isSection?: boolean
+  validate?: (value: number, inputs: Record<string, number>) => number
+}
+
+export interface BaseResult {
+  [key: string]: number | string | number[]
 }
 
 // Formula interface with specific result types
-export interface Formula<T extends Record<string, number> = Record<string, number>> {
+export interface Formula<T extends BaseResult> {
   name: string
   description: string
+  longDescription?: string
   variables: Record<string, Variable>
   calculate: (inputs: Record<string, number>) => T
   formatResult: (result: T) => string

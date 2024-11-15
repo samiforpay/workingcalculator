@@ -34,7 +34,19 @@ const BUSINESS_VALUATION_CONFIG = {
 
 export const businessValuationCalculator: Formula<BusinessValuationResult> = {
   name: 'Business Valuation Calculator',
-  description: 'Calculate business value using multiple valuation methods',
+  description: '',
+  longDescription: `
+    <p>Wondering how much your business is worth? Our Business Valuation Calculator is here to help! This simple business valuation tool allows you to calculate your business value online with ease. Whether you're looking to sell, buy, or just assess your company's worth, this business appraisal calculator provides you with a quick estimate. If you're a startup, use our startup valuation calculator to get insights tailored to new ventures.</p>
+    <p>Valuation methods:</p>
+    <ul>
+      <li>Asset-based valuation</li>
+      <li>Discounted cash flow (DCF)</li>
+      <li>Market multiple analysis</li>
+      <li>Revenue-based valuation</li>
+      <li>Earnings-based methods</li>
+    </ul>
+    <p>Understanding business value is crucial for buying, selling, or strategic planning. Use this calculator to get a comprehensive view of business worth.</p>
+  `,
   variables: {
     totalAssets: {
       label: 'Total Assets',
